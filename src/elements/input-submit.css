@@ -1,0 +1,16 @@
+.btn-search {
+  border: none;
+  text-transform: capitalize;
+  border-radius: 999px;
+  padding: 8px 40px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.btn-search.is-disabled {
+  background-color: hsl(0, 0%, 95%);
+  border-color: hsl(0, 0%, 90%);
+  color: hsl(0, 0%, 50%);
+  outline: none;
+  cursor: default;
+}
