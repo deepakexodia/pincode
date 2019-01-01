@@ -74,7 +74,7 @@ export default class PinCodeForm extends Component {
           onChange={this.handleCityChange}
           options={options}
         />
-        <InputSubmit value="Search" />
+        <InputSubmit value="Search" disabled={this.state.search.isDisabled} />
       </form>
     )
   }

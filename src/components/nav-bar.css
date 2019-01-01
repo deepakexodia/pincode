@@ -1,4 +1,4 @@
-.app-nav ul {
+.app-nav {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -6,7 +6,7 @@
   justify-content: flex-end;
 }
 
-.app-nav ul li {
+.app-nav li {
   margin: 0;
   padding: 0 1rem;
 }
