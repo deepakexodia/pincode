@@ -40,7 +40,7 @@ export default function PrivacyPolicy({ data }) {
       <p>
         Google is one of a third-party vendor on our site. It also uses cookies,
         known as DART cookies, to serve ads to our site visitors based upon
-        their visit to {webkitURL} and other sites on the internet. However,
+        their visit to {websiteURL} and other sites on the internet. However,
         visitors may choose to decline the use of DART cookies by visiting the
         Google ad and content network Privacy Policy at the following URL –
         https://policies.google.com/technologies/ads.
