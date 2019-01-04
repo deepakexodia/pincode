@@ -1,14 +1,14 @@
 import React from 'react'
+import '../css/common.css'
 
 export default function Disclaimer({ data }) {
   const { websiteName, companyName, websiteURL, email } = data.site.siteMetadata
   return (
-    <div>
+    <div className="disclaimer-section">
       <h1>Disclaimer for {companyName}</h1>
       <p>
         If you require any more information or have any questions about our
-        site's disclaimer, please feel free to contact us by email at
-        {email}.
+        site's disclaimer, please feel free to contact us by email at {email}.
       </p>
       <h2>Disclaimers for {companyName}</h2>
       <p>

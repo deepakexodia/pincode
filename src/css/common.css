@@ -1,0 +1,8 @@
+.about-us-section,
+.contact-us-section,
+.disclaimer-section,
+.privacy-policy-section {
+  width: 90%;
+  max-width: 24rem;
+  margin: 3rem auto 0;
+}

@@ -1,0 +1,9 @@
+form > * {
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+form > textarea {
+  max-width: 26rem;
+  min-height: 11rem;
+}

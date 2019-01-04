@@ -1,9 +1,10 @@
 import React from 'react'
+import '../css/common.css'
 
 export default function PrivacyPolicy({ data }) {
   const { websiteName, companyName, websiteURL, email } = data.site.siteMetadata
   return (
-    <div>
+    <div className="privacy-policy-section">
       <h1>Privacy Policy for {companyName}</h1>
       <p>
         At {websiteName}, accessible at {websiteURL}, one of our main priorities

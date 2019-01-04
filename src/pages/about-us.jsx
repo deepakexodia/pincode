@@ -1,9 +1,10 @@
 import React from 'react'
+import '../css/common.css'
 
 export default function AboutUs({ data }) {
   const { websiteURL } = data.site.siteMetadata
   return (
-    <div>
+    <div className="about-us-section">
       <h1>About us</h1>
       <p>
         The site {websiteURL} is an effort to provide reliable and accurate
