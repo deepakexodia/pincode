@@ -1,8 +1,21 @@
-.main > * {
-  width: 90%;
-  margin: 3rem auto 0;
+.main {
+  margin-top: 3rem;
 }
 
-.main > *:not(.table-container) {
+.pin-code-form-container,
+.post-office-form-container,
+.tabs,
+.table-container {
+  margin: auto;
+  width: 90%;
+}
+
+.pin-code-form-container,
+.post-office-form-container,
+.tabs {
   max-width: 20rem;
+}
+
+.tab-panel {
+  margin-top: 1.5rem;
 }

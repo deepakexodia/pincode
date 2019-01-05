@@ -35,16 +35,7 @@ export default class PostOfficeForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    // Axios({
-    //   method: 'get',
-    //   url: 'http://postalpincode.in/api/pincode/201012',
-    //   headers: { 'Content-Type': 'application/json' },
-    // })
-    Axios({
-      url: 'https://pincode.saratchandra.in/api/pincode/500022',
-    })
-      .then(resp => console.log(resp))
-      .catch(err => console.log(err))
+    this.props.onSubmit(this.state.input.value)
   }
 
   render = () => {

@@ -12,10 +12,7 @@ import {
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 import './table.css'
 
-export default function Table({
-  headers = ['Post Office', 'Pincode', 'Pin Code', 'Pin Code', 'Pin Code'],
-  data = [[0, 1, 2, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3, 4]],
-}) {
+export default function Table({ headers, data }) {
   return (
     <ExtTable>
       <Thead>

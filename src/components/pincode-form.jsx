@@ -47,6 +47,7 @@ export default class PinCodeForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
+    this.props.onSubmit(this.state.state, this.state.city)
   }
 
   render() {

@@ -17,45 +17,100 @@ console.log(postOffices)
 
 console.log(postOffices.map(postOffice => postOffice.State))
 
-export default () => (
-  <Fragment>
-    <SEO
-      title="Home"
-      keywords={[
-        'search pin code',
-        'search post office',
-        'find pin code',
-        'find post office',
-      ]}
-    />
-    <nav className="nav-container">
-      <NavBar />
-    </nav>
-    <main className="main">
-      <header className="header-container">
-        <Header />
-      </header>
-      <section className="app-container">
-        <Tabs>
-          <TabList>
-            <Tab>Pin Code</Tab>
-            <Tab>Post Office</Tab>
-          </TabList>
-          <TabPanel>
-            <section className="pin-code-form-container">
-              <PinCodeForm />
-            </section>
-          </TabPanel>
-          <TabPanel>
-            <section className="post-office-form-container">
-              <PostOfficeForm />
-            </section>
-          </TabPanel>
-        </Tabs>
-      </section>
-      <section className="table-container">
-        <Table />
-      </section>
-    </main>
-  </Fragment>
-)
+export default class extends React.Component {
+  state = {
+    pincodeDetails: {
+      headers: [],
+      data: [],
+    },
+    postOfficeDetails: {
+      headers: [],
+      data: [],
+    },
+  }
+
+  searchPincodeDetails = (state, city) => {
+    //make API call
+    this.setState({
+      pincodeDetails: {
+        headers: ['Post Office', 'Pincode', 'Pin Code', 'Pin Code', 'Pin Code'],
+        data: [
+          [0, 1, 2, 3, 4],
+          [0, 1, 2, 3, 4],
+          [0, 1, 2, 3, 4],
+          [0, 1, 2, 3, 4],
+        ],
+      },
+    })
+  }
+
+  searchPostOfficeDetails = pincode => {
+    //make API call
+    this.setState({
+      postOfficeDetails: {
+        headers: ['Post Office', 'Pincode', 'Pin Code', 'Pin Code', 'Pin Code'],
+        data: [[0, 1, 2, 3, 4], [0, 1, 2, 3, 4]],
+      },
+    })
+  }
+
+  render() {
+    return (
+      <Fragment>
+        <SEO
+          title="Home"
+          keywords={[
+            'search pin code',
+            'search post office',
+            'find pin code',
+            'find post office',
+            'get pin code',
+            'get post office',
+          ]}
+        />
+        <nav className="nav-container">
+          <NavBar />
+        </nav>
+        <main className="main">
+          <header className="header-container">
+            <Header />
+          </header>
+          <section className="app-container">
+            <Tabs>
+              <TabList className="tabs">
+                <Tab>Pin Code</Tab>
+                <Tab>Post Office</Tab>
+              </TabList>
+              <TabPanel className="tab-panel">
+                <section className="pin-code-form-container">
+                  <PinCodeForm onSubmit={this.searchPincodeDetails} />
+                </section>
+                <section className="table-container">
+                  {this.state.pincodeDetails.headers.length ? (
+                    <Table
+                      headers={this.state.pincodeDetails.headers}
+                      data={this.state.pincodeDetails.data}
+                    />
+                  ) : null}
+                </section>
+              </TabPanel>
+              <TabPanel className="tab-panel">
+                <section className="post-office-form-container">
+                  <PostOfficeForm onSubmit={this.searchPostOfficeDetails} />
+                </section>
+                <section className="table-container">
+                  {this.state.postOfficeDetails.headers.length ? (
+                    <Table
+                      headers={this.state.postOfficeDetails.headers}
+                      data={this.state.postOfficeDetails.data}
+                    />
+                  ) : null}
+                </section>
+              </TabPanel>
+            </Tabs>
+          </section>
+        </main>
+      </Fragment>
+    )
+  }
+}
