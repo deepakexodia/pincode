@@ -1,5 +1,8 @@
-.main {
+.main > * {
   width: 90%;
-  max-width: 20rem;
   margin: 3rem auto 0;
+}
+
+.main > *:not(.table-container) {
+  max-width: 20rem;
 }
