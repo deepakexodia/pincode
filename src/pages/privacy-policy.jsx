@@ -1,4 +1,5 @@
 import React from 'react'
+import { graphql } from 'gatsby'
 import '../css/common.css'
 
 export default function PrivacyPolicy({ data }) {

@@ -46,12 +46,23 @@ export default class extends React.Component {
 
   searchPostOfficeDetails = pincode => {
     //make API call
-    this.setState({
-      postOfficeDetails: {
-        headers: ['Post Office', 'Pincode', 'Pin Code', 'Pin Code', 'Pin Code'],
-        data: [[0, 1, 2, 3, 4], [0, 1, 2, 3, 4]],
-      },
-    })
+    fetch(`/.netlify/functions/postoffice?pincode=${pincode}`)
+      .then(response => response.json())
+      .then(json => {
+        console.log(json)
+        this.setState({
+          postOfficeDetails: {
+            headers: ['Post Office', 'Pincode', 'Taluk', 'District', 'State'],
+            data: json.map(obj => [
+              obj.office_name,
+              obj.pincode,
+              obj.taluk,
+              obj.district,
+              obj.state_name,
+            ]), //[[0, 1, 2, 3, 4], [0, 1, 2, 3, 4]],
+          },
+        })
+      })
   }
 
   render() {
