@@ -11,12 +11,6 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 import '../css/index.css'
 
-import postOffices from '../data/postoffices'
-
-console.log(postOffices)
-
-console.log(postOffices.map(postOffice => postOffice.State))
-
 export default class extends React.Component {
   state = {
     pincodeDetails: {

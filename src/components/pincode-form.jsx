@@ -5,6 +5,9 @@ import Select from 'react-select'
 
 import './pincode-form.css'
 
+import STATES from '../data/states'
+import PINCODE_DETAILS from '../data/pincode-details'
+
 export default class PinCodeForm extends Component {
   state = {
     state: {
@@ -19,15 +22,20 @@ export default class PinCodeForm extends Component {
       isDisabled: true,
       isLoading: false,
     },
+    cities: [],
   }
 
   handleStateChange = selectedOption => {
+    const cities = PINCODE_DETAILS()
+      .filter(detail => detail.s === selectedOption)
+      .map(detail => detail.d)
     this.setState(prevState => {
       return {
         ...prevState,
         ...{
           city: { ...prevState.city, isDisabled: false },
           state: { ...prevState.state, name: selectedOption },
+          cities: cities,
         },
       }
     })
@@ -51,11 +59,9 @@ export default class PinCodeForm extends Component {
   }
 
   render() {
-    const options = [
-      { value: 'chocolate', label: 'Chocolate' },
-      { value: 'strawberry', label: 'Strawberry' },
-      { value: 'vanilla', label: 'Vanilla' },
-    ]
+    const options = STATES.map(state => {
+      return { value: state, label: state.replace(/_/g, ' ') }
+    })
 
     return (
       <form onSubmit={this.handleSubmit}>
