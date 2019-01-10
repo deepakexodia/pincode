@@ -6,7 +6,7 @@ import Select from 'react-select'
 import './pincode-form.css'
 
 import STATES from '../data/states'
-// import PINCODE_DETAILS from '../data/pincode-details'
+import cities from "../data/cities"
 
 export default class PinCodeForm extends Component {
   state = {
@@ -26,16 +26,13 @@ export default class PinCodeForm extends Component {
   }
 
   handleStateChange = selectedOption => {
-    // const cities = PINCODE_DETAILS()
-    //   .filter(detail => detail.s === selectedOption)
-    //   .map(detail => detail.d)
     this.setState(prevState => {
       return {
         ...prevState,
         ...{
           city: { ...prevState.city, isDisabled: false },
-          state: { ...prevState.state, name: selectedOption },
-          // cities: cities,
+          state: { ...prevState.state, name: selectedOption},
+          cities: cities().filter(value=>value.s===selectedOption.label).map(value=>value.d),
         },
       }
     })
@@ -55,12 +52,16 @@ export default class PinCodeForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    this.props.onSubmit(this.state.state, this.state.city)
+    this.props.onSubmit(this.state.state.name.label, this.state.city.name.label)
   }
 
   render() {
-    const options = STATES.map(state => {
+    const states = STATES.map(state => {
       return { value: state, label: state.replace(/_/g, ' ') }
+    })
+
+    const cities = this.state.cities.map(city=>{
+      return {value: city, label: city}
     })
 
     return (
@@ -71,7 +72,7 @@ export default class PinCodeForm extends Component {
           isDisabled={this.state.state.isDisabled}
           value={this.state.state.name}
           onChange={this.handleStateChange}
-          options={options}
+          options={states}
         />
         <label>City:</label>
         <Select
@@ -79,7 +80,7 @@ export default class PinCodeForm extends Component {
           isDisabled={this.state.city.isDisabled}
           value={this.state.city.name}
           onChange={this.handleCityChange}
-          options={options}
+          options={cities}
         />
         <InputSubmit value="Search" disabled={this.state.search.isDisabled} />
       </form>

@@ -24,13 +24,11 @@ export default class extends React.Component {
   }
 
   searchPincodeDetails = (state, city) => {
-    //make API call
     console.log("searching pincode details")
-    fetch(`/.netlify/functions/pincode?state=JHARKHAND&city=SOUTH+EAST+DELHI`)
+    console.log(state, city)
+    fetch(`/.netlify/functions/pincode?state=${state.replace(/ /g,'+')}&city=${city.replace(/ /g, '+')}`)
     .then(response => response.json())
     .then(jsonArr => {
-      jsonArr.forEach(obj => delete obj._id)
-      console.log(jsonArr)
     this.setState({
       pincodeDetails: {
         headers: ['Locality', 'Post Office', 'Pin Code', 'Sub-District', 'District', 'State'],
@@ -49,7 +47,6 @@ export default class extends React.Component {
   }
 
   searchPostOfficeDetails = pincode => {
-    //make API call
     fetch(`/.netlify/functions/postoffice?pincode=${pincode}`)
       .then(response => response.json())
       .then(json => {
@@ -63,7 +60,7 @@ export default class extends React.Component {
               obj.taluk,
               obj.district,
               obj.state_name,
-            ]), //[[0, 1, 2, 3, 4], [0, 1, 2, 3, 4]],
+            ]),
           },
         })
       })
