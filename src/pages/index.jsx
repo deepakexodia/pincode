@@ -7,9 +7,9 @@ import PostOfficeForm from '../components/post-office-form'
 import Table from '../elements/table'
 import SEO from '../components/seo'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
-import { Loader } from 'react-overlay-loader';
- 
-import 'react-overlay-loader/styles.css';
+import { Loader } from 'react-overlay-loader'
+
+import 'react-overlay-loader/styles.css'
 import 'react-tabs/style/react-tabs.css'
 import '../css/index.css'
 
@@ -23,32 +23,41 @@ export default class extends React.Component {
       headers: [],
       data: [],
     },
-    isLoading: false
+    isLoading: false,
   }
 
   searchPincodeDetails = (state, city) => {
-    console.log("searching pincode details")
-    console.log(state, city)
-    fetch(`/.netlify/functions/pincode?state=${state.replace(/ /g,'+')}&city=${city.replace(/ /g, '+')}`)
-    .then(response => response.json())
-    .then(jsonArr => {
-    this.setState({
-      pincodeDetails: {
-        headers: ['Locality', 'Post Office', 'Pin Code', 'Sub-District', 'District', 'State'],
-        data: jsonArr.map( obj => [
-          obj.l,
-          obj.o,
-          obj.p,
-          obj.t,
-          obj.d,
-          obj.s
-        ]),
-      },
-      isLoading: false,
-    })
-  }
+    this.setState({ isLoading: true })
+    fetch(
+      `/.netlify/functions/pincode?state=${state.replace(
+        / /g,
+        '+'
+      )}&city=${city.replace(/ /g, '+')}`
     )
-    this.setState({isLoading: true})
+      .then(response => response.json())
+      .then(jsonArr => {
+        this.setState({
+          pincodeDetails: {
+            headers: [
+              'Locality',
+              'Post Office',
+              'Pin Code',
+              'Sub-District',
+              'District',
+              'State',
+            ],
+            data: jsonArr.map(obj => [
+              obj.l,
+              obj.o,
+              obj.p,
+              obj.t,
+              obj.d,
+              obj.s,
+            ]),
+          },
+          isLoading: false,
+        })
+      })
   }
 
   searchPostOfficeDetails = pincode => {
@@ -66,11 +75,10 @@ export default class extends React.Component {
               obj.district,
               obj.state_name,
             ]),
-            isLoading: false,
           },
+          isLoading: false,
         })
       })
-      this.setState({isLoading: true})
   }
 
   render() {
