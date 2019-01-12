@@ -9,6 +9,7 @@ import Table from '../elements/table'
 import SEO from '../components/seo'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { Loader } from 'react-overlay-loader'
+import Layout from "../components/layout"
 
 import 'react-overlay-loader/styles.css'
 import 'react-tabs/style/react-tabs.css'
@@ -84,7 +85,7 @@ export default class extends React.Component {
 
   render() {
     return (
-      <Fragment>
+      <Layout>
           <SEO
             title="Home"
             keywords={[
@@ -96,9 +97,6 @@ export default class extends React.Component {
               'get post office',
             ]}
           />
-          <nav className="nav-container">
-            <NavBar />
-          </nav>
           <main className="main">
             <header className="header-container">
               <Header />
@@ -143,7 +141,7 @@ export default class extends React.Component {
           <Footer />
           </footer>
           <Loader fullPage loading={this.state.isLoading} />
-      </Fragment>
+      </Layout>
     )
   }
 }

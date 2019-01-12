@@ -1,21 +1,10 @@
 import React, { Component } from 'react'
 import InputSubmit from '../elements/input-submit'
+import Layout from "../components/layout"
 import '../css/common.css'
 import '../css/contact-us.css'
 import Axios from 'axios'
 
-// export default function ContactUs() {
-//   return (
-//     <div className="contact-us-section">
-//       <h1>Contact us</h1>
-//       <form onSubmit={this.handleSubmit} method="POST" action="https://formspree.io/deepakexodia@gmail.com">
-//         <input type="email" name="email" placeholder="Your email" />
-//         <textarea name="message" placeholder="Test Message" />
-//         <InputSubmit value="Send" />
-//       </form>
-//     </div>
-//   )
-// }
 
 export default class ContactUs extends Component {
   initState = {
@@ -44,6 +33,7 @@ export default class ContactUs extends Component {
 
   render() {
     return (
+      <Layout>
       <div className="contact-us-section">
         <h1>Contact us</h1>
         <form
@@ -67,6 +57,7 @@ export default class ContactUs extends Component {
           <InputSubmit value="Send" disabled={this.state.isSubmitDisabled} />
         </form>
       </div>
+      </Layout>
     )
   }
 }

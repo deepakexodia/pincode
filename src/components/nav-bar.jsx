@@ -7,8 +7,7 @@ export default function NavBar() {
   return (
     <ul className="app-nav">
       {[
-        { to: '/privacy-policy/', linkText: 'Privacy Policy' },
-        { to: '/contact-us/', linkText: 'Contact Us' },
+        { to: '/', linkText: 'Home' },
       ].map(({ to, linkText }) => (
         <li key={to}>
           <Link to={to}>{linkText}</Link>

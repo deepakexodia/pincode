@@ -1,10 +1,13 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+
+import Layout from "../components/layout"
 import '../css/common.css'
 
 export default function PrivacyPolicy({ data }) {
   const { websiteName, companyName, websiteURL, email } = data.site.siteMetadata
   return (
+    <Layout>
     <div className="privacy-policy-section">
       <h1>Privacy Policy for {companyName}</h1>
       <p>
@@ -85,6 +88,7 @@ export default function PrivacyPolicy({ data }) {
         to its Terms and Conditions.
       </p>
     </div>
+    </Layout>
   )
 }
 

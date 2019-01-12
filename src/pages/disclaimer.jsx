@@ -1,9 +1,11 @@
 import React from 'react'
+import Layout from "../components/layout"
 import '../css/common.css'
 
 export default function Disclaimer({ data }) {
   const { websiteName, companyName, websiteURL, email } = data.site.siteMetadata
   return (
+    <Layout>
     <div className="disclaimer-section">
       <h1>Disclaimer for {companyName}</h1>
       <p>
@@ -30,6 +32,7 @@ export default function Disclaimer({ data }) {
         changes will be prominently posted here.
       </p>
     </div>
+    </Layout>
   )
 }
 
