@@ -4,6 +4,7 @@ import NavBar from '../components/nav-bar'
 import Header from '../components/header'
 import PinCodeForm from '../components/pincode-form'
 import PostOfficeForm from '../components/post-office-form'
+import Footer from '../components/footer'
 import Table from '../elements/table'
 import SEO from '../components/seo'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
@@ -84,60 +85,64 @@ export default class extends React.Component {
   render() {
     return (
       <Fragment>
-        <SEO
-          title="Home"
-          keywords={[
-            'search pin code',
-            'search post office',
-            'find pin code',
-            'find post office',
-            'get pin code',
-            'get post office',
-          ]}
-        />
-        <nav className="nav-container">
-          <NavBar />
-        </nav>
-        <main className="main">
-          <header className="header-container">
-            <Header />
-          </header>
-          <section className="app-container">
-            <Tabs>
-              <TabList className="tabs">
-                <Tab>Pin Code</Tab>
-                <Tab>Post Office</Tab>
-              </TabList>
-              <TabPanel className="tab-panel">
-                <section className="pin-code-form-container">
-                  <PinCodeForm onSubmit={this.searchPincodeDetails} />
-                </section>
-                <section className="table-container">
-                  {this.state.pincodeDetails.headers.length ? (
-                    <Table
-                      headers={this.state.pincodeDetails.headers}
-                      data={this.state.pincodeDetails.data}
-                    />
-                  ) : null}
-                </section>
-              </TabPanel>
-              <TabPanel className="tab-panel">
-                <section className="post-office-form-container">
-                  <PostOfficeForm onSubmit={this.searchPostOfficeDetails} />
-                </section>
-                <section className="table-container">
-                  {this.state.postOfficeDetails.headers.length ? (
-                    <Table
-                      headers={this.state.postOfficeDetails.headers}
-                      data={this.state.postOfficeDetails.data}
-                    />
-                  ) : null}
-                </section>
-              </TabPanel>
-            </Tabs>
-          </section>
-        </main>
-        <Loader fullPage loading={this.state.isLoading} />
+          <SEO
+            title="Home"
+            keywords={[
+              'search pin code',
+              'search post office',
+              'find pin code',
+              'find post office',
+              'get pin code',
+              'get post office',
+            ]}
+          />
+          <nav className="nav-container">
+            <NavBar />
+          </nav>
+          <main className="main">
+            <header className="header-container">
+              <Header />
+            </header>
+            <section className="app-container">
+              <Tabs>
+                <TabList className="tabs">
+                  <Tab>Pin Code</Tab>
+                  <Tab>Post Office</Tab>
+                </TabList>
+                <TabPanel className="tab-panel">
+                  <section className="pin-code-form-container">
+                    <PinCodeForm onSubmit={this.searchPincodeDetails} />
+                  </section>
+                  <section className="table-container">
+                    {this.state.pincodeDetails.headers.length ? (
+                      <Table
+                        headers={this.state.pincodeDetails.headers}
+                        data={this.state.pincodeDetails.data}
+                      />
+                    ) : null}
+                  </section>
+                </TabPanel>
+                <TabPanel className="tab-panel">
+                  <section className="post-office-form-container">
+                    <PostOfficeForm onSubmit={this.searchPostOfficeDetails} />
+                  </section>
+                  <section className="table-container">
+                    {this.state.postOfficeDetails.headers.length ? (
+                      <Table
+                        headers={this.state.postOfficeDetails.headers}
+                        data={this.state.postOfficeDetails.data}
+                      />
+                    ) : null}
+                  </section>
+                </TabPanel>
+              </Tabs>
+            </section>
+          </main>
+          <footer className="footer-container">
+
+          <Footer />
+          </footer>
+          <Loader fullPage loading={this.state.isLoading} />
       </Fragment>
     )
   }
