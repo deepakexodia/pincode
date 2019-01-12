@@ -7,7 +7,9 @@ import PostOfficeForm from '../components/post-office-form'
 import Table from '../elements/table'
 import SEO from '../components/seo'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
-
+import { Loader } from 'react-overlay-loader';
+ 
+import 'react-overlay-loader/styles.css';
 import 'react-tabs/style/react-tabs.css'
 import '../css/index.css'
 
@@ -21,6 +23,7 @@ export default class extends React.Component {
       headers: [],
       data: [],
     },
+    isLoading: false
   }
 
   searchPincodeDetails = (state, city) => {
@@ -41,9 +44,11 @@ export default class extends React.Component {
           obj.s
         ]),
       },
+      isLoading: false,
     })
   }
     )
+    this.setState({isLoading: true})
   }
 
   searchPostOfficeDetails = pincode => {
@@ -61,9 +66,11 @@ export default class extends React.Component {
               obj.district,
               obj.state_name,
             ]),
+            isLoading: false,
           },
         })
       })
+      this.setState({isLoading: true})
   }
 
   render() {
@@ -122,6 +129,7 @@ export default class extends React.Component {
             </Tabs>
           </section>
         </main>
+        <Loader fullPage loading={this.state.isLoading} />
       </Fragment>
     )
   }
