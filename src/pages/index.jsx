@@ -63,6 +63,7 @@ export default class extends React.Component {
   }
 
   searchPostOfficeDetails = pincode => {
+    this.setState({ isLoading: true })
     fetch(`/.netlify/functions/postoffice?pincode=${pincode}`)
       .then(response => response.json())
       .then(json => {
