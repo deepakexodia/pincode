@@ -15,8 +15,9 @@ module.exports = {
   //   )
   // },
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+    title: `Search Pincode`,
+    description: `Search pincodes in a very fast, intuitive and easy
+    manner.`,
     author: `Deepak Singh`,
     websiteName: 'My Pincode',
     companyName: 'My Pincode',

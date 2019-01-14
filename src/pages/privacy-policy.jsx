@@ -2,12 +2,14 @@ import React from 'react'
 import { graphql } from 'gatsby'
 
 import Layout from "../components/layout"
+import SEO from '../components/seo'
 import '../css/common.css'
 
 export default function PrivacyPolicy({ data }) {
   const { websiteName, companyName, websiteURL, email } = data.site.siteMetadata
   return (
     <Layout>
+      <SEO title="Privacy Policy" />
     <div className="privacy-policy-section">
       <h1>Privacy Policy for {companyName}</h1>
       <p>

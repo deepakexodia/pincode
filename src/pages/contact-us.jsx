@@ -4,6 +4,7 @@ import Layout from "../components/layout"
 import '../css/common.css'
 import '../css/contact-us.css'
 import Axios from 'axios'
+import SEO from '../components/seo'
 
 
 export default class ContactUs extends Component {
@@ -34,6 +35,7 @@ export default class ContactUs extends Component {
   render() {
     return (
       <Layout>
+        <SEO title="Contact us" />
       <div className="contact-us-section">
         <h1>Contact us</h1>
         <form

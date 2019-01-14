@@ -1,11 +1,13 @@
 import React from 'react'
 import Layout from "../components/layout"
+import SEO from '../components/seo'
 import '../css/common.css'
 
 export default function Disclaimer({ data }) {
   const { websiteName, companyName, websiteURL, email } = data.site.siteMetadata
   return (
     <Layout>
+      <SEO title="Disclaimer" />
     <div className="disclaimer-section">
       <h1>Disclaimer for {companyName}</h1>
       <p>
