@@ -9,7 +9,7 @@ import Table from '../elements/table'
 import SEO from '../components/seo'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { Loader } from 'react-overlay-loader'
-import Layout from "../components/layout"
+import Layout from '../components/layout'
 
 import 'react-overlay-loader/styles.css'
 import 'react-tabs/style/react-tabs.css'
@@ -18,10 +18,12 @@ import '../css/index.css'
 export default class extends React.Component {
   state = {
     pincodeDetails: {
+      status: '',
       headers: [],
       data: [],
     },
     postOfficeDetails: {
+      status: '',
       headers: [],
       data: [],
     },
@@ -65,11 +67,18 @@ export default class extends React.Component {
   searchPostOfficeDetails = pincode => {
     this.setState({ isLoading: true })
     fetch(`/.netlify/functions/postoffice?pincode=${pincode}`)
-      .then(response => response.json())
+      .then(resp => {
+        const { status } = resp.status
+        if (status === 200) {
+          return resp.json()
+        }
+        throw status
+      })
       .then(json => {
         console.log(json)
         this.setState({
           postOfficeDetails: {
+            status: 'FOUND',
             headers: ['Post Office', 'Pincode', 'Taluk', 'District', 'State'],
             data: json.map(obj => [
               obj.office_name,
@@ -82,66 +91,87 @@ export default class extends React.Component {
           isLoading: false,
         })
       })
+      .catch(err => {
+        if (err === 404) {
+          this.state({
+            postOfficeDetails: {
+              status: 'NOT_FOUND',
+              headers: [],
+              data: [],
+            },
+            isLoading: false,
+          })
+        }
+        else {
+          this.state({
+            postOfficeDetails: {
+              status: 'SERVER_ISSUE',
+              headers: [],
+              data: [],
+            },
+            isLoading: false,
+          })
+        }
+      })
   }
 
   render() {
     return (
       <Layout>
-          <SEO
-            title="Home"
-            keywords={[
-              'search pin code',
-              'search post office',
-              'find pin code',
-              'find post office',
-              'get pin code',
-              'get post office',
-            ]}
-          />
-          <main className="main">
-            <header className="header-container">
-              <Header />
-            </header>
-            <section className="app-container">
-              <Tabs>
-                <TabList className="tabs">
-                  <Tab>Pin Code</Tab>
-                  <Tab>Post Office</Tab>
-                </TabList>
-                <TabPanel className="tab-panel">
-                  <section className="pin-code-form-container">
-                    <PinCodeForm onSubmit={this.searchPincodeDetails} />
-                  </section>
-                  <section className="table-container">
-                    {this.state.pincodeDetails.headers.length ? (
-                      <Table
-                        headers={this.state.pincodeDetails.headers}
-                        data={this.state.pincodeDetails.data}
-                      />
-                    ) : null}
-                  </section>
-                </TabPanel>
-                <TabPanel className="tab-panel">
-                  <section className="post-office-form-container">
-                    <PostOfficeForm onSubmit={this.searchPostOfficeDetails} />
-                  </section>
-                  <section className="table-container">
-                    {this.state.postOfficeDetails.headers.length ? (
-                      <Table
-                        headers={this.state.postOfficeDetails.headers}
-                        data={this.state.postOfficeDetails.data}
-                      />
-                    ) : null}
-                  </section>
-                </TabPanel>
-              </Tabs>
-            </section>
-          </main>
-          <footer className="footer-container">
-
+        <SEO
+          title="Home"
+          keywords={[
+            'search pin code',
+            'search post office',
+            'find pin code',
+            'find post office',
+            'get pin code',
+            'get post office',
+          ]}
+        />
+        <main className="main">
+          <header className="header-container">
+            <Header />
+          </header>
+          <section className="app-container">
+            <Tabs>
+              <TabList className="tabs">
+                <Tab>Pin Code</Tab>
+                <Tab>Post Office</Tab>
+              </TabList>
+              <TabPanel className="tab-panel">
+                <section className="pin-code-form-container">
+                  <PinCodeForm onSubmit={this.searchPincodeDetails} />
+                </section>
+                <section className="table-container">
+                  {this.state.pincodeDetails.headers.length ? (
+                    <Table
+                      headers={this.state.pincodeDetails.headers}
+                      data={this.state.pincodeDetails.data}
+                    />
+                  ) : null}
+                </section>
+              </TabPanel>
+              <TabPanel className="tab-panel">
+                <section className="post-office-form-container">
+                  <PostOfficeForm onSubmit={this.searchPostOfficeDetails} />
+                </section>
+                <section className="table-container">
+                  {this.state.postOfficeDetails.headers.length ? (
+                    <Table
+                      headers={this.state.postOfficeDetails.headers}
+                      data={this.state.postOfficeDetails.data}
+                    />
+                  ) : null}
+                </section>
+              </TabPanel>
+            </Tabs>
+          </section>
+        </main>
+        <footer className="footer-container">
           <Footer />
-          </footer>
-          <Loader fullPage loading={this.state.isLoading} />
+        </footer>
+        <Loader fullPage loading={this.state.isLoading} />
       </Layout>
     )
   }
