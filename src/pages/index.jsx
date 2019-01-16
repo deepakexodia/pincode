@@ -10,6 +10,7 @@ import SEO from '../components/seo'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { Loader } from 'react-overlay-loader'
 import Layout from '../components/layout'
+import Modal from 'react-awesome-modal'
 
 import 'react-overlay-loader/styles.css'
 import 'react-tabs/style/react-tabs.css'
@@ -28,6 +29,11 @@ export default class extends React.Component {
       data: [],
     },
     isLoading: false,
+    modal: {
+      visible: false,
+      title: '',
+      content: '',
+    },
   }
 
   searchPincodeDetails = (state, city) => {
@@ -69,7 +75,7 @@ export default class extends React.Component {
     fetch(`/.netlify/functions/postoffice?pincode=${pincode}`)
       .then(resp => {
         const { status } = resp.status
-        if (status === 200) {
+        if (status == 200) {
           return resp.json()
         }
         throw status
@@ -92,27 +98,49 @@ export default class extends React.Component {
         })
       })
       .catch(err => {
-        if (err === 404) {
-          this.state({
+        if (err == 404) {
+          this.setState({
             postOfficeDetails: {
               status: 'NOT_FOUND',
               headers: [],
               data: [],
             },
             isLoading: false,
+            modal: {
+              visible: true,
+              title: 'Error',
+              content:
+                'Postoffice details for the searched pincode are not found. Please check if the pincode is correct',
+            },
           })
-        }
-        else {
-          this.state({
+        } else {
+          this.setState({
             postOfficeDetails: {
               status: 'SERVER_ISSUE',
               headers: [],
               data: [],
             },
             isLoading: false,
+            modal: {
+              visible: true,
+              title: 'Error',
+              content:
+                'Seems there is an issue at our end. Please try again after some time',
+            },
           })
         }
       })
+  }
+
+  closeModal = () => {
+    this.setState(prevState => {
+      return {
+        modal: {
+          ...prevState.modal,
+          visible: false,
+        },
+      }
+    })
   }
 
   render() {
@@ -172,6 +200,21 @@ export default class extends React.Component {
           <Footer />
         </footer>
         <Loader fullPage loading={this.state.isLoading} />
+        <Modal
+          visible={this.state.modal.visible}
+          width="250px"
+          height="200px"
+          effect="fadeInUp"
+          onClickAway={this.closeModal}
+        >
+          <div style={{
+            textAlign: "center",
+            padding: "1rem"
+            }}>
+            <h1>{this.state.modal.title}</h1>
+            <p>{this.state.modal.content}</p>
+          </div>
+        </Modal>
       </Layout>
     )
   }
