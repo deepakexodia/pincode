@@ -5,22 +5,24 @@ export function handler(event, context, callback) {
   const { pincode } = event.queryStringParameters
   fetch(`https://pincode.saratchandra.in/api/pincode/${pincode}`)
     .then(resp => {
-      const { status } = resp.status
-      if (status === 200 || status === 404) {
+      const { status } = resp
+      console.log("status: ",status);
+      
+      if (status == 200 || status == 404) {
         return resp.json()
       } else {
         throw 'server issue'
       }
     })
     .then(json => {
-      if (json.status === 200) {
+      if (json.status == 200) {
         callback(null, {
           // return null to show no errors
           statusCode: json.status,
           body: JSON.stringify(json.data),
         })
       }
-      if (json.status === 404) {
+      if (json.status == 404) {
         callback(null, {
           statusCode: json.status,
           body: JSON.stringify(json.message),

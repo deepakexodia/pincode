@@ -74,7 +74,7 @@ export default class extends React.Component {
     this.setState({ isLoading: true })
     fetch(`/.netlify/functions/postoffice?pincode=${pincode}`)
       .then(resp => {
-        const { status } = resp.status
+        const { status } = resp
         if (status == 200) {
           return resp.json()
         }
