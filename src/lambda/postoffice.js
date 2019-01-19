@@ -6,8 +6,6 @@ export function handler(event, context, callback) {
   fetch(`https://pincode.saratchandra.in/api/pincode/${pincode}`)
     .then(resp => {
       const { status } = resp
-      console.log("status: ",status);
-      
       if (status == 200 || status == 404) {
         return resp.json()
       } else {
