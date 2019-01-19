@@ -44,10 +44,17 @@ export default class extends React.Component {
         '+'
       )}&city=${city.replace(/ /g, '+')}`
     )
-      .then(response => response.json())
+      .then(resp => {
+        const { status } = resp
+        if (status == 200) {
+          return resp.json()
+        }
+        throw status
+      })
       .then(jsonArr => {
         this.setState({
           pincodeDetails: {
+            status: 'FOUND',
             headers: [
               'Locality',
               'Post Office',
@@ -68,6 +75,22 @@ export default class extends React.Component {
           isLoading: false,
         })
       })
+      .catch(err => {
+        this.setState({
+          pincodeDetails: {
+            status: 'SERVER_ISSUE',
+            headers: [],
+            data: [],
+          },
+          isLoading: false,
+          modal: {
+            visible: true,
+            title: 'Error',
+            content:
+              'Seems there is an issue at our end. Please try again after some time',
+          },
+        })
+      })
   }
 
   searchPostOfficeDetails = pincode => {
@@ -81,7 +104,6 @@ export default class extends React.Component {
         throw status
       })
       .then(json => {
-        console.log(json)
         this.setState({
           postOfficeDetails: {
             status: 'FOUND',
@@ -207,10 +229,12 @@ export default class extends React.Component {
           effect="fadeInUp"
           onClickAway={this.closeModal}
         >
-          <div style={{
-            textAlign: "center",
-            padding: "1rem"
-            }}>
+          <div
+            style={{
+              textAlign: 'center',
+              padding: '1rem',
+            }}
+          >
             <h1>{this.state.modal.title}</h1>
             <p>{this.state.modal.content}</p>
           </div>
