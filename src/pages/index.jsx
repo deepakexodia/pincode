@@ -46,9 +46,9 @@ export default class extends React.Component {
     )
       .then(resp => {
         const { status } = resp
-        if (status == 200) {
+        // if (status == 200) {
           return resp.json()
-        }
+        // }
         throw status
       })
       .then(jsonArr => {
