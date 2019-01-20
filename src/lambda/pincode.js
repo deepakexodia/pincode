@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 mongoose.connect(
-  'mongodb://deepakexodia:Darkmagician1!@ds117960.mlab.com:17960/pincode'
+  'mongodb://read:darkmagician123@ds117960.mlab.com:17960/pincode'
   // { useNewUrlParser: true }
   // function(err) {
   //   console.error('Error connecting to DB: ',err)
