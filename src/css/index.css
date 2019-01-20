@@ -19,3 +19,14 @@
 .tab-panel {
   margin-top: 1.5rem;
 }
+
+a,
+a:active {
+  color: hsla(0, 0%, 0%, 0.8);
+  text-decoration: none;
+}
+
+a:hover {
+  color: hsl(0, 0%, 0%);
+  text-decoration: underline;
+}
