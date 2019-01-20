@@ -1,11 +1,19 @@
 const mongoose = require('mongoose')
 mongoose.connect(
-  'mongodb://deepakexodia:Darkmagician1!@ds117960.mlab.com:17960/pincode',
-  // { useNewUrlParser: true },
-  function(err) {
-    console.error('Error connecting to DB: ',err)
-  }
+  'mongodb://deepakexodia:Darkmagician1!@ds117960.mlab.com:17960/pincode'
+  // { useNewUrlParser: true }
+  // function(err) {
+  //   console.error('Error connecting to DB: ',err)
+  // }
 )
+var db = mongoose.connection;
+db.on('error', function(err){
+  console.log('Error connecting to DB: ', err);
+});
+db.once('open', function() {
+  console.log('Connected to DB');
+});
+
 var pincodeSchema = new mongoose.Schema({
   l: String,
   o: String,
@@ -21,9 +29,9 @@ export function handler(event, context, callback) {
   const { state, city } = event.queryStringParameters
   Pincode.find({ s: state, d: city }, function(err, pincodes) {
     if (err) {
-      callback(null,{
+      callback(null, {
         statusCode: 500,
-        body: JSON.stringify("server issue")
+        body: JSON.stringify('server issue'),
       })
     }
     pincodes.forEach(obj => delete obj._id)
