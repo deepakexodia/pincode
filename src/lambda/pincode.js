@@ -3,7 +3,7 @@ mongoose.connect(
   'mongodb://deepakexodia:Darkmagician1!@ds117960.mlab.com:17960/pincode',
   // { useNewUrlParser: true },
   function(err) {
-    console.error(err)
+    console.error('Error connecting to DB: ',err)
   }
 )
 var pincodeSchema = new mongoose.Schema({
