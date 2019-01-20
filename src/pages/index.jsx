@@ -46,10 +46,10 @@ export default class extends React.Component {
     )
       .then(resp => {
         const { status } = resp
-        // if (status == 200) {
+        if (status == 200) {
           return resp.json()
-        // }
-        throw status
+        }
+        throw resp
       })
       .then(jsonArr => {
         this.setState({
@@ -76,6 +76,7 @@ export default class extends React.Component {
         })
       })
       .catch(err => {
+        console.log(err);
         this.setState({
           pincodeDetails: {
             status: 'SERVER_ISSUE',
@@ -101,6 +102,7 @@ export default class extends React.Component {
         if (status == 200) {
           return resp.json()
         }
+        console.log(resp)
         throw status
       })
       .then(json => {
