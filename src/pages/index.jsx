@@ -1,6 +1,5 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 
-import NavBar from '../components/nav-bar'
 import Header from '../components/header'
 import PinCodeForm from '../components/pincode-form'
 import PostOfficeForm from '../components/post-office-form'
@@ -180,6 +179,7 @@ export default class extends React.Component {
             'get pin code',
             'get post office',
           ]}
+          meta={{name: "google-site-verification", content:"THJj8oIGrpH37EQrBy6Vm2oUTB93KlBaXl2Rf71Ch2Y"}}
         />
         <main className="main">
           <header className="header-container">
