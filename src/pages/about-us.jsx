@@ -12,7 +12,7 @@ export default function AboutUs({ data }) {
       <h1>About us</h1>
       <p>
         The site {websiteURL} is an effort to provide reliable and accurate
-        information on all India Postal PIN codes in a very intuitive and easy
+        information on all India pincodes in a very intuitive and easy
         manner.
       </p>
       </div>
