@@ -1,7 +1,6 @@
 var fetch = require('node-fetch')
 let API_KEY = '579b464db66ec23bdd000001e9d5256b853f407a64ab0495b3234214'
 export function handler(event, context, callback) {
-  console.log('queryStringParameters', event.queryStringParameters)
   const { state, city } = event.queryStringParameters
   let formattedCity = city
     .split(' ')
@@ -20,8 +19,6 @@ export function handler(event, context, callback) {
     })
     .then(json => {
       let records = json.records
-      console.log(records)
-
       records.sort((a, b) => a.officename.localeCompare(b.officename))
       let filterRecords = records.filter(
         record => record.statename.toLowerCase() === state.toLowerCase()

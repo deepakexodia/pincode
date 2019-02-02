@@ -13,6 +13,7 @@ import Modal from 'react-awesome-modal'
 import 'react-overlay-loader/styles.css'
 import 'react-tabs/style/react-tabs.css'
 import '../css/index.css'
+import Pagination from '../components/pagination'
 
 export default class extends React.Component {
   state = {
@@ -154,7 +155,12 @@ export default class extends React.Component {
     })
   }
 
+  onPincodePaginationClick = event => {
+
+  }
+
   render() {
+    const enabledAlphabets = Array.from(new Set(this.state.pincodeDetails.data.map(record => record[0].charAt(0).toUpperCase())))
     return (
       <>
         <SEO
@@ -190,6 +196,9 @@ export default class extends React.Component {
               <TabPanel className="tab-panel">
                 <section className="pin-code-form-container">
                   <PinCodeForm onSubmit={this.searchPincodeDetails} />
+                </section>
+                <section className="pagination-container">
+                  <Pagination enabledAlphabets={enabledAlphabets} onClickHandler={this.onPincodePaginationClick} />
                 </section>
                 <section className="table-container">
                   {this.state.pincodeDetails.headers.length ? (

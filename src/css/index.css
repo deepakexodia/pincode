@@ -14,7 +14,8 @@ body {
 .pin-code-form-container,
 .post-office-form-container,
 .tabs,
-.table-container {
+.table-container,
+.pagination-container {
   margin: auto;
   width: 90%;
 }
@@ -26,6 +27,8 @@ body {
 .tabs > * {
   flex-grow: 1;
 }
+
+
 
 .pin-code-form-container,
 .post-office-form-container,
@@ -43,11 +46,9 @@ a {
 
 a,
 a:active {
-  /* color: hsla(0, 0%, 0%, 0.8); */
   text-decoration: underline;
 }
 
 a:hover {
-  /* color: hsl(0, 0%, 0%); */
   text-decoration: none;
 }
