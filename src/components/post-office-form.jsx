@@ -15,23 +15,22 @@ export default class PostOfficeForm extends Component {
 
   handleChange = event => {
     var val = event.target.value
-    // val = val.match(/d+/g)
-    // val = (isNaN(val) | (val === 0)) & ''
-
-    if (val.length === 6)
-      this.setState(prevState => {
-        return {
-          input: { value: val },
-          search: { ...prevState.search, isDisabled: false },
-        }
-      })
-    else
-      this.setState(prevState => {
-        return {
-          input: { value: val },
-          search: { ...prevState.search, isDisabled: true },
-        }
-      })
+    if (val.match(/\D/g) === null) {
+      if (val.length === 6)
+        this.setState(prevState => {
+          return {
+            input: { value: val },
+            search: { ...prevState.search, isDisabled: false },
+          }
+        })
+      else
+        this.setState(prevState => {
+          return {
+            input: { value: val },
+            search: { ...prevState.search, isDisabled: true },
+          }
+        })
+    }
   }
 
   handleSubmit = event => {
