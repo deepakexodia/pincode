@@ -24,7 +24,7 @@ export default [
   'MEGHALAYA',
   'MIZORAM',
   'NAGALAND',
-  'ORISSA',
+  'ODISHA',
   'PONDICHERRY',
   'PUNJAB',
   'RAJASTHAN',
