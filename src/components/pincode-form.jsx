@@ -30,7 +30,7 @@ export default class PinCodeForm extends Component {
       return {
         ...prevState,
         ...{
-          city: { ...prevState.city, isDisabled: false },
+          city: { name: null, isDisabled: false },
           state: { ...prevState.state, name: selectedOption },
           cities: cities()
             .filter(value => value.s === selectedOption.label)
