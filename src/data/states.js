@@ -5,7 +5,7 @@ export default [
   'ASSAM',
   'BIHAR',
   'CHANDIGARH',
-  'CHHATTISGARH',
+  'CHATTISGARH',
   'DADRA_&_NAGAR_HAVELI',
   'DAMAN_&_DIU',
   'DELHI',
