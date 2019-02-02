@@ -6,7 +6,7 @@ import Select from 'react-select'
 import './pincode-form.css'
 
 import STATES from '../data/states'
-import cities from "../data/cities"
+import cities from '../data/cities'
 
 export default class PinCodeForm extends Component {
   state = {
@@ -31,8 +31,10 @@ export default class PinCodeForm extends Component {
         ...prevState,
         ...{
           city: { ...prevState.city, isDisabled: false },
-          state: { ...prevState.state, name: selectedOption},
-          cities: cities().filter(value=>value.s===selectedOption.label).map(value=>value.d),
+          state: { ...prevState.state, name: selectedOption },
+          cities: cities()
+            .filter(value => value.s === selectedOption.label)
+            .map(value => value.d),
         },
       }
     })
@@ -52,7 +54,11 @@ export default class PinCodeForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    this.props.onSubmit(this.state.state.name.label, this.state.city.name.label)
+    this.state.search.isDisabled ||
+      this.props.onSubmit(
+        this.state.state.name.label,
+        this.state.city.name.label
+      )
   }
 
   render() {
@@ -60,8 +66,8 @@ export default class PinCodeForm extends Component {
       return { value: state, label: state.replace(/_/g, ' ') }
     })
 
-    const cities = this.state.cities.map(city=>{
-      return {value: city, label: city}
+    const cities = this.state.cities.map(city => {
+      return { value: city, label: city }
     })
 
     return (
@@ -82,7 +88,13 @@ export default class PinCodeForm extends Component {
           onChange={this.handleCityChange}
           options={cities}
         />
-        <InputSubmit value="Search" disabled={this.state.search.isDisabled} />
+        <div className="search-btn-container">
+          <InputSubmit
+            className="search-btn"
+            value="Search"
+            disabled={this.state.search.isDisabled}
+          />
+        </div>
       </form>
     )
   }

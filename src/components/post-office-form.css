@@ -1,4 +1,14 @@
-.pincode {
+.post-office-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* .input__label {
+  text-align: left;
+} */
+
+.input__field {
   margin-bottom: 1.5rem;
   display: block;
   border-color: hsl(0, 0%, 80%);
@@ -10,10 +20,10 @@
   transition: all 100ms;
 }
 
-.pincode:hover {
+.input__field:hover {
   border-color: hsl(0, 0%, 70%);
 }
 
-.pincode:focus {
+.input__field:focus {
   box-shadow: 0 0 0 1px #2684ff;
 }

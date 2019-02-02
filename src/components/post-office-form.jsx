@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import Axios from 'axios'
+
+import InputSubmit from '../elements/input-submit'
 
 import './post-office-form.css'
 
@@ -35,26 +36,26 @@ export default class PostOfficeForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    this.props.onSubmit(this.state.input.value)
+    this.state.search.isDisabled || this.props.onSubmit(this.state.input.value)
   }
 
   render = () => {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>Pincode:</label>
-        <input
-          className="pincode"
-          type="text"
-          maxLength="6"
-          value={this.state.input.value}
-          onChange={this.handleChange}
-        />
-        <input
-          className={`btn-search ${
-            this.state.search.isDisabled ? 'is-disabled' : ''
-          }`}
-          type="submit"
+      <form className="post-office-form" onSubmit={this.handleSubmit}>
+        <div className="post-office-form__input">
+          <label className="input__label">Pincode:</label>
+          <input
+            className="input__field"
+            type="text"
+            maxLength="6"
+            value={this.state.input.value}
+            onChange={this.handleChange}
+          />
+        </div>
+        <InputSubmit
+          className="search-btn"
           value="Search"
+          disabled={this.state.search.isDisabled}
         />
       </form>
     )

@@ -8,7 +8,6 @@ import Table from '../elements/table'
 import SEO from '../components/seo'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { Loader } from 'react-overlay-loader'
-import Layout from '../components/layout'
 import Modal from 'react-awesome-modal'
 
 import 'react-overlay-loader/styles.css'
@@ -168,7 +167,7 @@ export default class extends React.Component {
 
   render() {
     return (
-      <Layout>
+      <>
         <SEO
           title="Find Pincode/Postoffice details"
           keywords={[
@@ -182,10 +181,10 @@ export default class extends React.Component {
           description="Find reliable and accurate
           information on all India pincodes in a very intuitive and easy
           manner"
-          meta={{
+          meta={[{
             name: 'google-site-verification',
             content: 'THJj8oIGrpH37EQrBy6Vm2oUTB93KlBaXl2Rf71Ch2Y',
-          }}
+          }]}
         />
         <main className="main">
           <header className="header-container">
@@ -247,7 +246,7 @@ export default class extends React.Component {
             <p>{this.state.modal.content}</p>
           </div>
         </Modal>
-      </Layout>
+      </>
     )
   }
 }

@@ -1,5 +1,14 @@
+body {
+  background-color: #eae5db;
+  color: #5b71ab;
+}
+
 .main {
-  margin-top: 3rem;
+  margin-top: 2rem;
+}
+
+.app-container {
+  margin-top: 1.5rem;
 }
 
 .pin-code-form-container,
@@ -8,6 +17,14 @@
 .table-container {
   margin: auto;
   width: 90%;
+}
+
+.tabs {
+  display: flex;
+}
+
+.tabs > * {
+  flex-grow: 1;
 }
 
 .pin-code-form-container,
@@ -20,13 +37,17 @@
   margin-top: 1.5rem;
 }
 
+a {
+  color: #5b71ab;
+}
+
 a,
 a:active {
-  color: hsla(0, 0%, 0%, 0.8);
-  text-decoration: none;
+  /* color: hsla(0, 0%, 0%, 0.8); */
+  text-decoration: underline;
 }
 
 a:hover {
-  color: hsl(0, 0%, 0%);
-  text-decoration: underline;
+  /* color: hsl(0, 0%, 0%); */
+  text-decoration: none;
 }

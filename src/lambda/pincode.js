@@ -16,6 +16,7 @@ export function handler(event, context, callback) {
     .then(json => {
       console.log(json)
       json.forEach(obj => delete obj._id)
+      json.sort((a,b)=> a.l.localeCompare(b.l))
       callback(null, {
         statusCode: 200,
         body: JSON.stringify(json),

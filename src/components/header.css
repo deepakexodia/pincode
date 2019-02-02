@@ -1,3 +1,14 @@
 .header {
   text-align: center;
 }
+
+.header__title {
+  color: #f96363;
+  font-weight: bold;
+}
+
+.header__desc {
+  margin-top: 4rem;
+  color: #5b71ab;
+
+}
