@@ -49,25 +49,17 @@ export default class extends React.Component {
         }
         throw resp
       })
-      .then(jsonArr => {
+      .then(records => {
         this.setState({
           pincodeDetails: {
             status: 'FOUND',
-            headers: [
-              'Locality',
-              'Post Office',
-              'Pin Code',
-              'Sub-District',
-              'District',
-              'State',
-            ],
-            data: jsonArr.map(obj => [
-              obj.l,
-              obj.o,
-              obj.p,
-              obj.t,
-              obj.d,
-              obj.s,
+            headers: ['Post Office', 'Pin Code', 'Taluk', 'District', 'State'],
+            data: records.map(record => [
+              record.officename,
+              record.pincode,
+              record.taluk,
+              record.districtname,
+              record.statename,
             ]),
           },
           isLoading: false,
@@ -103,17 +95,17 @@ export default class extends React.Component {
         console.log(resp)
         throw status
       })
-      .then(json => {
+      .then(records => {
         this.setState({
           postOfficeDetails: {
             status: 'FOUND',
             headers: ['Post Office', 'Pincode', 'Taluk', 'District', 'State'],
-            data: json.map(obj => [
-              obj.office_name,
-              obj.pincode,
-              obj.taluk,
-              obj.district,
-              obj.state_name,
+            data: records.map(record => [
+              record.office_name,
+              record.pincode,
+              record.taluk,
+              record.district,
+              record.state_name,
             ]),
           },
           isLoading: false,
@@ -181,10 +173,12 @@ export default class extends React.Component {
           description="Find reliable and accurate
           information on all India pincodes in a very intuitive and easy
           manner"
-          meta={[{
-            name: 'google-site-verification',
-            content: 'THJj8oIGrpH37EQrBy6Vm2oUTB93KlBaXl2Rf71Ch2Y',
-          }]}
+          meta={[
+            {
+              name: 'google-site-verification',
+              content: 'THJj8oIGrpH37EQrBy6Vm2oUTB93KlBaXl2Rf71Ch2Y',
+            },
+          ]}
         />
         <main className="main">
           <header className="header-container">
