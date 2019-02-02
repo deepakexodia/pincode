@@ -21,11 +21,13 @@ export default class extends React.Component {
       status: '',
       headers: [],
       data: [],
+      selectedAlphabet: '',
     },
     postOfficeDetails: {
       status: '',
       headers: [],
       data: [],
+      selectedAlphabet: '',
     },
     isLoading: false,
     modal: {
@@ -59,6 +61,7 @@ export default class extends React.Component {
               record.districtname,
               record.statename,
             ]),
+            selectedAlphabet: '',
           },
           isLoading: false,
         })
@@ -70,6 +73,7 @@ export default class extends React.Component {
             status: 'SERVER_ISSUE',
             headers: [],
             data: [],
+            selectedAlphabet: '',
           },
           isLoading: false,
           modal: {
@@ -105,6 +109,7 @@ export default class extends React.Component {
               record.district,
               record.state_name,
             ]),
+            selectedAlphabet: '',
           },
           isLoading: false,
         })
@@ -116,6 +121,7 @@ export default class extends React.Component {
               status: 'NOT_FOUND',
               headers: [],
               data: [],
+              selectedAlphabet: '',
             },
             isLoading: false,
             modal: {
@@ -155,12 +161,40 @@ export default class extends React.Component {
     })
   }
 
-  onPincodePaginationClick = event => {
+  onPincodePaginationClick = e => {
+    e.preventDefault()
+    const text = e.target.text
+    this.setState(prevState => {
+      return {
+        pincodeDetails: {
+          ...prevState.pincodeDetails,
+          selectedAlphabet: text,
+        },
+      }
+    })
+  }
 
+  onPostOfficePaginationClick = e => {
+    e.preventDefault()
+    const text = e.target.text
+    this.setState(prevState => {
+      return {
+        postOfficeDetails: {
+          ...prevState.postOfficeDetails,
+          selectedAlphabet: text,
+        },
+      }
+    })
   }
 
   render() {
-    const enabledAlphabets = Array.from(new Set(this.state.pincodeDetails.data.map(record => record[0].charAt(0).toUpperCase())))
+    const enabledAlphabets = Array.from(
+      new Set(
+        this.state.pincodeDetails.data.map(record =>
+          record[0].charAt(0).toUpperCase()
+        )
+      )
+    )
     return (
       <>
         <SEO
@@ -198,13 +232,24 @@ export default class extends React.Component {
                   <PinCodeForm onSubmit={this.searchPincodeDetails} />
                 </section>
                 <section className="pagination-container">
-                  <Pagination enabledAlphabets={enabledAlphabets} onClickHandler={this.onPincodePaginationClick} />
+                  <Pagination
+                    enabledAlphabets={enabledAlphabets}
+                    onClickHandler={this.onPincodePaginationClick}
+                  />
                 </section>
                 <section className="table-container">
                   {this.state.pincodeDetails.headers.length ? (
                     <Table
                       headers={this.state.pincodeDetails.headers}
-                      data={this.state.pincodeDetails.data}
+                      data={
+                        this.state.pincodeDetails.selectedAlphabet.length === 0
+                          ? this.state.pincodeDetails.data
+                          : this.state.pincodeDetails.data.filter(
+                              record =>
+                                record[0].charAt(0).toUpperCase() ===
+                                this.state.pincodeDetails.selectedAlphabet
+                            )
+                      }
                     />
                   ) : null}
                 </section>
@@ -213,11 +258,32 @@ export default class extends React.Component {
                 <section className="post-office-form-container">
                   <PostOfficeForm onSubmit={this.searchPostOfficeDetails} />
                 </section>
+                <section className="pagination-container">
+                  <Pagination
+                    enabledAlphabets={Array.from(
+                      new Set(
+                        this.state.postOfficeDetails.data.map(record =>
+                          record[0].charAt(0).toUpperCase()
+                        )
+                      )
+                    )}
+                    onClickHandler={this.onPostOfficePaginationClick}
+                  />
+                </section>
                 <section className="table-container">
                   {this.state.postOfficeDetails.headers.length ? (
                     <Table
                       headers={this.state.postOfficeDetails.headers}
-                      data={this.state.postOfficeDetails.data}
+                      data={
+                        this.state.postOfficeDetails.selectedAlphabet.length ===
+                        0
+                          ? this.state.postOfficeDetails.data
+                          : this.state.postOfficeDetails.data.filter(
+                              record =>
+                                record[0].charAt(0).toUpperCase() ===
+                                this.state.postOfficeDetails.selectedAlphabet
+                            )
+                      }
                     />
                   ) : null}
                 </section>
