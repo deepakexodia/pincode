@@ -22,6 +22,7 @@
     "react-dom": "^16.6.3",
     "react-helmet": "^5.2.0",
     "react-overlay-loader": "0.0.3",
+    "react-responsive": "^6.1.1",
     "react-select": "^2.1.2",
     "react-super-responsive-table": "^4.3.5",
     "react-tabs": "^2.3.0",

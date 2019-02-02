@@ -6,14 +6,15 @@ import PostOfficeForm from '../components/post-office-form'
 import Footer from '../components/footer'
 import Table from '../elements/table'
 import SEO from '../components/seo'
+import Pagination from '../components/pagination'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { Loader } from 'react-overlay-loader'
 import Modal from 'react-awesome-modal'
+import MediaQuery from 'react-responsive'
 
 import 'react-overlay-loader/styles.css'
 import 'react-tabs/style/react-tabs.css'
 import '../css/index.css'
-import Pagination from '../components/pagination'
 
 export default class extends React.Component {
   state = {
@@ -231,12 +232,14 @@ export default class extends React.Component {
                 <section className="pin-code-form-container">
                   <PinCodeForm onSubmit={this.searchPincodeDetails} />
                 </section>
-                <section className="pagination-container">
-                  <Pagination
-                    enabledAlphabets={enabledAlphabets}
-                    onClickHandler={this.onPincodePaginationClick}
-                  />
-                </section>
+                <MediaQuery query="(min-device-width: 1360px)">
+                  <section className="pagination-container">
+                    <Pagination
+                      enabledAlphabets={enabledAlphabets}
+                      onClickHandler={this.onPincodePaginationClick}
+                    />
+                  </section>
+                </MediaQuery>
                 <section className="table-container">
                   {this.state.pincodeDetails.headers.length ? (
                     <Table
@@ -258,18 +261,20 @@ export default class extends React.Component {
                 <section className="post-office-form-container">
                   <PostOfficeForm onSubmit={this.searchPostOfficeDetails} />
                 </section>
-                <section className="pagination-container">
-                  <Pagination
-                    enabledAlphabets={Array.from(
-                      new Set(
-                        this.state.postOfficeDetails.data.map(record =>
-                          record[0].charAt(0).toUpperCase()
+                <MediaQuery query="(min-device-width: 1360px)">
+                  <section className="pagination-container">
+                    <Pagination
+                      enabledAlphabets={Array.from(
+                        new Set(
+                          this.state.postOfficeDetails.data.map(record =>
+                            record[0].charAt(0).toUpperCase()
+                          )
                         )
-                      )
-                    )}
-                    onClickHandler={this.onPostOfficePaginationClick}
-                  />
-                </section>
+                      )}
+                      onClickHandler={this.onPostOfficePaginationClick}
+                    />
+                  </section>
+                </MediaQuery>
                 <section className="table-container">
                   {this.state.postOfficeDetails.headers.length ? (
                     <Table
