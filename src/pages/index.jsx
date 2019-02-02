@@ -36,12 +36,9 @@ export default class extends React.Component {
 
   searchPincodeDetails = (state, city) => {
     this.setState({ isLoading: true })
-    fetch(
-      `/.netlify/functions/pincode?state=${state.replace(
-        / /g,
-        '+'
-      )}&city=${city.replace(/ /g, '+')}`
-    )
+    state = state.replace(/ /g, '+').replace(/&/g, '%26')
+    city = city.replace(/ /g, '+').replace(/&/g, '%26')
+    fetch(`/.netlify/functions/pincode?state=${state}&city=${city}`)
       .then(resp => {
         const { status } = resp
         if (status == 200) {

@@ -7,6 +7,7 @@ export function handler(event, context, callback) {
     .split(' ')
     .map(word => word.toLowerCase())
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .reduce((acc, current)=> acc+' '+current)
   fetch(
     `https://api.data.gov.in/resource/6176ee09-3d56-4a3b-8115-21841576b2f6?api-key=${API_KEY}&format=json&offset=0&limit=100000&filters[districtname]=${formattedCity}`
   )
@@ -19,6 +20,8 @@ export function handler(event, context, callback) {
     })
     .then(json => {
       let records = json.records
+      console.log(records)
+
       records.sort((a, b) => a.officename.localeCompare(b.officename))
       let filterRecords = records.filter(
         record => record.statename.toLowerCase() === state.toLowerCase()
