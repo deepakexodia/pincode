@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
+
 import InputSubmit from '../elements/input-submit'
 import Layout from "../components/layout"
-import '../css/common.css'
-import '../css/contact-us.css'
 import Axios from 'axios'
 import SEO from '../components/seo'
-
+import '../css/common.css'
+import '../css/contact-us.css'
 
 export default class ContactUs extends Component {
   initState = {

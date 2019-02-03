@@ -1,14 +1,22 @@
 import React from 'react'
-
+import { Link } from 'gatsby'
 import './footer.css'
 
 export default function Footer() {
   return (
-      <ul className="footer">
-        <li><a href="about-us">About us</a></li>
-        <li><a href="disclaimer">Disclaimer</a></li>
-        <li><a href="privacy-policy">Privacy Policy</a></li>
-        <li><a href="contact-us">Contact us</a></li>
-      </ul>
+    <ul className="footer">
+      <li>
+        <Link to="about-us">About us</Link>
+      </li>
+      <li>
+        <Link to="disclaimer">Disclaimer</Link>
+      </li>
+      <li>
+        <Link to="privacy-policy">Privacy Policy</Link>
+      </li>
+      <li>
+        <Link to="contact-us">Contact us</Link>
+      </li>
+    </ul>
   )
 }

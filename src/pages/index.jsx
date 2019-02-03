@@ -14,6 +14,7 @@ import MediaQuery from 'react-responsive'
 
 import 'react-overlay-loader/styles.css'
 import 'react-tabs/style/react-tabs.css'
+import '../components/layout.css'
 import '../css/index.css'
 
 export default class extends React.Component {
