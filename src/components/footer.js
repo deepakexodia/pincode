@@ -14,9 +14,6 @@ export default function Footer() {
       <li>
         <Link to="privacy-policy">Privacy Policy</Link>
       </li>
-      <li>
-        <Link to="contact-us">Contact us</Link>
-      </li>
     </ul>
   )
 }
