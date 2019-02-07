@@ -15,13 +15,14 @@ module.exports = {
   //   )
   // },
   siteMetadata: {
+    siteUrl: `https://mypincode.netlify.com`,
     title: `Search Pincode`,
     description: `Search pincodes in a very fast, intuitive and easy
     manner.`,
     author: `Deepak Singh`,
     websiteName: 'My Pincode',
     companyName: 'My Pincode',
-    websiteURL: 'mypincode.netlify.com',
+    websiteURL: 'https://mypincode.netlify.com',
     email: 'deepakexodia@gmail.com',
   },
   plugins: [
