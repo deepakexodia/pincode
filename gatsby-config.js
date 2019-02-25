@@ -1,4 +1,5 @@
 var proxy = require('http-proxy-middleware')
+const siteUrl = `https://mypincode.netlify.com`;
 
 module.exports = {
   // for avoiding CORS while developing Netlify Functions locally
@@ -15,7 +16,7 @@ module.exports = {
   //   )
   // },
   siteMetadata: {
-    siteUrl: `https://mypincode.netlify.com`,
+    siteUrl: siteUrl,
     title: `Search Pincode`,
     description: `Search pincodes in a very fast, intuitive and easy
     manner.`,
@@ -47,7 +48,15 @@ module.exports = {
         icon: `src/images/favicon.png`, // This path is relative to the root of the site.
       },
     },
-    `gatsby-plugin-sitemap`
+    `gatsby-plugin-sitemap`,
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: siteUrl,
+        sitemap: siteUrl+'/sitemap.xml',
+        policy: [{ userAgent: '*', allow: '/', disallow:['/about-us','/disclaimer','/privacy-policy'] }]
+      }
+    }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',
